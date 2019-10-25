@@ -61,7 +61,7 @@ public class ObligSBinTre<T> implements Beholder<T>
 
       // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-      p = new Node<>(verdi, p);                   // oppretter en ny node
+      p = new Node<>(verdi, null);                   // oppretter en ny node
 
       if (q == null) rot = p;                  // p blir rotnode
       else if (cmp < 0) q.venstre = p;         // venstre barn til q
@@ -203,8 +203,13 @@ public class ObligSBinTre<T> implements Beholder<T>
 
 
   public static void main(String[] args){
-    ObligSBinTre<String> tre = new ObligSBinTre<>(Comparator.naturalOrder());
-    System.out.println(tre.antall());
+    //ObligSBinTre<String> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+    //System.out.println(tre.antall());
+
+      Integer[] a = {4,7,2,9,5,10,8,1,3,6};
+      ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+      for(int verdi : a) tre.leggInn(verdi);
+      System.out.println(tre.antall());  // Utskrift: 10
   }
 
 } // ObligSBinTre
