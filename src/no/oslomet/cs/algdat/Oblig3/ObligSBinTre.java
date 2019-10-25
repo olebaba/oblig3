@@ -2,6 +2,8 @@ package no.oslomet.cs.algdat.Oblig3;
 
 ////////////////// ObligSBinTre /////////////////////////////////
 
+import sun.font.CreatedFontTracker;
+
 import java.util.*;
 
 public class ObligSBinTre<T> implements Beholder<T>
@@ -61,7 +63,7 @@ public class ObligSBinTre<T> implements Beholder<T>
 
       // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-      p = new Node<>(verdi, null);                   // oppretter en ny node
+      p = new Node<>(verdi, q);                   // oppretter en ny node
 
       if (q == null) rot = p;                  // p blir rotnode
       else if (cmp < 0) q.venstre = p;         // venstre barn til q
@@ -108,7 +110,27 @@ public class ObligSBinTre<T> implements Beholder<T>
   
   public int antall(T verdi)
   {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+    //throw new UnsupportedOperationException("Ikke kodet ennå!");
+      if(!inneholder(verdi)) return 0;
+      Node<T> p = rot;
+      int antallP = 0;
+
+      int cmp = comp.compare(verdi, p.verdi);
+
+      while (true){
+          while (p.venstre != null){
+              p = p.venstre;
+          }
+          if(p.venstre != null){
+              p = p.venstre;
+
+          } else if(p.høyre == null) break;
+          else {
+              p = p.høyre;
+          }
+      }
+
+      return antallP;
   }
   
   @Override
@@ -203,13 +225,14 @@ public class ObligSBinTre<T> implements Beholder<T>
 
 
   public static void main(String[] args){
-    //ObligSBinTre<String> tre = new ObligSBinTre<>(Comparator.naturalOrder());
-    //System.out.println(tre.antall());
-
-      Integer[] a = {4,7,2,9,5,10,8,1,3,6};
+      Integer[] a = {4,7,2,9,4,10,8,7,4,6};
       ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
       for(int verdi : a) tre.leggInn(verdi);
-      System.out.println(tre.antall());  // Utskrift: 10
+      System.out.println(tre.antall());      // Utskrift: 10
+      System.out.println(tre.antall(5));     // Utskrift: 0
+      System.out.println(tre.antall(4));     // Utskrift: 3
+      System.out.println(tre.antall(7));     // Utskrift: 2
+      System.out.println(tre.antall(10));    // Utskrift: 1
   }
 
 } // ObligSBinTre
