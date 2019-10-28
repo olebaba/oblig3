@@ -8,6 +8,8 @@ import java.util.*;
 
 public class ObligSBinTre<T> implements Beholder<T>
 {
+    TabellStakk<T> hjelpestakk; //hjelpevariabel
+    TabellListe<T> hjelpeliste;
   private static final class Node<T>   // en indre nodeklasse
   {
     private T verdi;                   // nodens verdi
@@ -43,6 +45,8 @@ public class ObligSBinTre<T> implements Beholder<T>
     rot = null;
     antall = 0;
     comp = c;
+    hjelpestakk=new TabellStakk<>();
+    hjelpeliste=new TabellListe<>();
   }
   
   @Override
@@ -50,6 +54,8 @@ public class ObligSBinTre<T> implements Beholder<T>
   {
     //throw new UnsupportedOperationException("Ikke kodet ennå!");
       Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
+      hjelpestakk.leggInn(verdi);
+      hjelpeliste.leggInn(verdi);
 
       Node<T> p = rot, q = null;               // p starter i roten
       int cmp = 0;                             // hjelpevariabel
@@ -112,10 +118,13 @@ public class ObligSBinTre<T> implements Beholder<T>
   {
     //throw new UnsupportedOperationException("Ikke kodet ennå!");
       if(!inneholder(verdi)) return 0;
-      Node<T> p = rot;
+      //Node<T> p = rot;
       int antallP = 0;
+      for (T n : hjelpeliste) {
+          if (n.equals(verdi)) antallP++;
+      }
 
-      int cmp = comp.compare(verdi, p.verdi);
+      /*int cmp = comp.compare(verdi, p.verdi);
 
       while (true){
           while (p.venstre != null){
@@ -128,7 +137,7 @@ public class ObligSBinTre<T> implements Beholder<T>
           else {
               p = p.høyre;
           }
-      }
+      }*/
 
       return antallP;
   }
@@ -147,6 +156,12 @@ public class ObligSBinTre<T> implements Beholder<T>
   
   private static <T> Node<T> nesteInorden(Node<T> p)
   {
+      if(p.forelder!=null){
+          while(p.venstre!=null){
+              p=p.venstre;
+          }
+
+  }
     throw new UnsupportedOperationException("Ikke kodet ennå!");
   }
   
@@ -168,7 +183,7 @@ public class ObligSBinTre<T> implements Beholder<T>
   c = c.venstre;
   }
   while(nesteInorden(c) != null){
-  sb.append(c.verdi + ", ")
+  sb.append(c.verdi + ", ");
   c = nesteInorden(c);
   }
   
