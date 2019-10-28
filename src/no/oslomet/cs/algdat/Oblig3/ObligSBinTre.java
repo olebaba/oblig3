@@ -8,8 +8,8 @@ import java.util.*;
 
 public class ObligSBinTre<T> implements Beholder<T>
 {
-    TabellStakk<T> hjelpestakk; //hjelpevariabel
-    TabellListe<T> hjelpeliste;
+    private TabellStakk<T> hjelpestakk; //hjelpevariabel
+    private TabellListe<T> hjelpeliste;
   private static final class Node<T>   // en indre nodeklasse
   {
     private T verdi;                   // nodens verdi
