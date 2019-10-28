@@ -157,6 +157,7 @@ public class ObligSBinTre<T> implements Beholder<T>
   private static <T> Node<T> nesteInorden(Node<T> p)
   {
       if(p.forelder!=null){
+          //b
           while(p.venstre!=null){
               p=p.venstre;
           }
