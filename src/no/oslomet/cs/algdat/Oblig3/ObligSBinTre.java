@@ -276,10 +276,51 @@ public class ObligSBinTre<T> implements Beholder<T>
         return sb.toString();
     }
 
-    public String omvendtString()
-    {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
-    }
+  public String omvendtString(){
+      
+      if(tom()){
+          return ("[]");
+      }
+      if(antall == 1){
+          return ("["+rot+"]");
+      }
+      
+      int t = antall;
+      TabellStakk<Node<T>> stakk = new TabellStakk<>();
+      
+      StringBuilder sb = new StringBuilder();
+      sb.append("[");
+      
+      Node<T> c = rot;
+      
+      while(true){
+          
+          if(t == 1){
+              sb.append(c.verdi + "]");
+          }
+          else{
+              sb.append(c.verdi + ", ");
+              t--;
+          }
+      }
+      
+      for(; c.høyre != null; c = c.høyre){
+          stakk.leggInn(c);
+      }
+      
+      if(c.venstre != null){
+          
+          for(c = c.venstre; c.høyre != null; c = c.høyre){
+              stakk.leggInn(c);
+          }
+      }
+      else{
+          c = stakk.taUt();
+      }
+      
+      sb.append("]");
+      return sb.toString();
+  }
 
     public String høyreGren()
     {
