@@ -342,9 +342,14 @@ public class ObligSBinTre<T> implements Beholder<T>
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
-    public String postString()
-    {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+    public String postString(){
+          
+      if(tom()){
+          return ("[]");
+      }
+      if(antall == 1){
+          return ("[" + rot + "]");
+      }
     }
 
     @Override
