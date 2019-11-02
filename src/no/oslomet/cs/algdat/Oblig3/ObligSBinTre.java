@@ -160,21 +160,6 @@ public class ObligSBinTre<T> implements Beholder<T>
             if (n.equals(verdi)) antallP++;
         }
 
-      /*int cmp = comp.compare(verdi, p.verdi);
-
-      while (true){
-          while (p.venstre != null){
-              p = p.venstre;
-          }
-          if(p.venstre != null){
-              p = p.venstre;
-
-          } else if(p.høyre == null) break;
-          else {
-              p = p.høyre;
-          }
-      }*/
-
         return antallP;
     }
 
@@ -221,14 +206,19 @@ public class ObligSBinTre<T> implements Beholder<T>
             System.out.println("test3" + ++test3);
             return q;
         }else {
+            if(q.høyre == null && q.venstre == null){
+                System.out.println("test6");
+                return q.forelder.forelder;
+            }
             q = q.forelder;
             System.out.println("test4" + ++test4);
-            if(q.høyre != null && q.høyre != p){
-                if(q.forelder != null) {
+            if(q.høyre != null && q.høyre != p) {
+                if (q.forelder != null) {
                     q = q.forelder;
                     System.out.println("test5" + ++test5);
                     return q;
-                }else {
+                } else {
+                    System.out.println("test5.1 ");
                     q = q.høyre;
                     while (q.venstre != null) {
                         q = q.venstre;
@@ -239,15 +229,6 @@ public class ObligSBinTre<T> implements Beholder<T>
             return null;
 
         }
-
-      /*if(p.forelder!=null){
-          //b
-          while(p.venstre!=null){
-              p=p.venstre;
-          }
-
-      }
-      return p;*/
     }
 
     @Override
@@ -293,7 +274,7 @@ public class ObligSBinTre<T> implements Beholder<T>
       
       Node<T> c = rot;
       
-      while(true){
+      while(t>0){
           
           if(t == 1){
               sb.append(c.verdi + "]");
