@@ -177,7 +177,14 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     private static <T> Node<T> nesteInorden(Node<T> p) {
         Node<T> q = p;
-        int test = 0, test2 = 0, test3 = 0, test4 = 0, test5 = 0;
+
+        if(q.høyre != null){
+            q = q.høyre;
+            while (q.venstre != null){
+                q = q.venstre;
+            }
+            return q;
+        }
 
         if(q.forelder == null){
             System.out.println("test0");
@@ -192,43 +199,36 @@ public class ObligSBinTre<T> implements Beholder<T>
             }
         }
 
-        if (q.høyre != null && q.venstre == null){
-            q = q.høyre;
-            System.out.println("test" + ++test);
-            while (q.venstre != null){
-                q = q.venstre;
-                System.out.println("test2" + ++test2);
-            }
-            return q;
-        }
+
         if(q.forelder.venstre == p){
             q = q.forelder;
-            System.out.println("test3" + ++test3);
+            System.out.println("test3");
             return q;
-        }else {
-            if(q.høyre == null && q.venstre == null){
-                System.out.println("test6");
-                return q.forelder.forelder;
-            }
-            q = q.forelder;
-            System.out.println("test4" + ++test4);
-            if(q.høyre != null && q.høyre != p) {
-                if (q.forelder != null) {
-                    q = q.forelder;
-                    System.out.println("test5" + ++test5);
-                    return q;
-                } else {
-                    System.out.println("test5.1 ");
-                    q = q.høyre;
-                    while (q.venstre != null) {
-                        q = q.venstre;
-                    }
-                    return q;
-                }
-            }
-            return null;
-
         }
+
+        if(q.forelder.høyre == p){
+            q = q.forelder.forelder;
+            System.out.println("test4");
+            return q;
+        }
+
+        q = q.forelder;
+        if(q.høyre != null && q.høyre != p) {
+            if (q.forelder != null) {
+                q = q.forelder;
+                System.out.println("test5");
+                return q;
+            } else {
+                System.out.println("test5.1");
+                q = q.høyre;
+                while (q.venstre != null) {
+                    q = q.venstre;
+                }
+                return q;
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -331,6 +331,8 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(antall == 1){
           return ("[" + rot + "]");
       }
+
+      return null;
     }
 
     @Override
@@ -383,7 +385,7 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     public static void main(String[] args){
 
-         int[] a = {3,5,6,3,2,1,4,5};
+         int[] a = {3, 3, 5, 6, 4, 5, 2, 1};
          ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
          for(int verdi : a) tre.leggInn(verdi);
 
