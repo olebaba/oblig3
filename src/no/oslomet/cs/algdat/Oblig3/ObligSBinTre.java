@@ -470,7 +470,7 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     }
     public Liste<Node<T>> blhj(Node<T> p,Liste<Node<T>> list){
-        //if(siste(p)) return list;
+        
         if(p!=null){
             if(p.høyre==null && p.venstre==null){
                 list.leggInn(p);
