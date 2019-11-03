@@ -365,9 +365,37 @@ public class ObligSBinTre<T> implements Beholder<T>
         }
 
         @Override
-        public void remove()
-        {
-            throw new UnsupportedOperationException("Ikke kodet ennå!");
+        public void remove(){
+            
+            if(!removeOK){
+                throw new IllegalStateException("feil ved fjerning");
+            }
+            
+            removeOK = false;
+            
+            if(q.forelder != null){
+                
+                if(q.forelder.venstre == q){
+                    
+                    q.forelder.verdi = null;
+                    
+                    q.forelder = null;
+                }
+                else{
+                    
+                    q.forelder.høyre = null;
+                    
+                    q.forelder = null;
+                }
+            }
+            else{
+                    rot = null;
+                    
+                    System.out.println("");
+                }
+            antall--;
+            iteratorendringer++;
+            endringer++;
         }
 
     } // BladnodeIterator
