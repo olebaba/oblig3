@@ -544,6 +544,7 @@ public class ObligSBinTre<T> implements Beholder<T>
         @Override
         public T next()
         {
+            removeOK = true;
 
             if (!hasNext()) throw new NoSuchElementException("Ingen verdier!");
 
