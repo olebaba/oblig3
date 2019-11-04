@@ -113,14 +113,15 @@ public class ObligSBinTre<T> implements Beholder<T>
         }
         if (p == null) return false;   // finner ikke verdi
 
-        if (p.venstre == null || p.høyre == null)  // Tilfelle 1) og 2)
+        if (p.venstre == null || p.høyre == null)  // når verdiens node ikke har barn på en eller begge av sidene
         {
             Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
             if (p == rot) rot = b;
             else if (p == q.venstre) q.venstre = b;
             else q.høyre = b;
+
         }
-        else  // Tilfelle 3)
+        else  // når verdiens node har barn på begge sider
         {
             Node<T> s = p, r = p.høyre;   // finner neste i inorden
             while (r.venstre != null)
@@ -131,7 +132,7 @@ public class ObligSBinTre<T> implements Beholder<T>
 
             p.verdi = r.verdi;   // kopierer verdien i r til p
 
-            if (s != p) s.venstre = r.høyre;
+            if (s != p){ s.venstre = r.høyre; }
             else s.høyre = r.høyre;
         }
 
@@ -141,7 +142,9 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     public int fjernAlle(T verdi)
     {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        int startAntall = antall;
+        while (fjern(verdi)) fjern(verdi);
+        return startAntall - antall;
     }
 
     @Override
@@ -322,7 +325,9 @@ public class ObligSBinTre<T> implements Beholder<T>
 
         private BladnodeIterator()  // konstruktør
         {
-            throw new UnsupportedOperationException("Ikke kodet ennå!");
+            if(!tom()){
+                p =
+            }
         }
 
         @Override
@@ -334,7 +339,11 @@ public class ObligSBinTre<T> implements Beholder<T>
         @Override
         public T next()
         {
-            throw new UnsupportedOperationException("Ikke kodet ennå!");
+            if(bladnodeverdier().isEmpty()){
+                throw new NoSuchElementException("Ingen flere bladnoder.");
+            }
+
+            removeOK = true;
         }
 
         @Override
@@ -373,34 +382,16 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     } // BladnodeIterator
 
-    public static void test(ObligSBinTre tre){
-    Node p = tre.rot;
-    while (p.venstre != null) p = p.venstre;
-        System.out.println(p);
-    while (nesteInorden(p) != null){
-        System.out.println(nesteInorden(p));
-        p=nesteInorden(p);
-    }
-
-}
-
     public static void main(String[] args){
 
-         int[] a = {4,7,2,9,4,10,8,7,4,6,1};
-         ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
-         for(int verdi : a) tre.leggInn(verdi);
-
-         //test(tre);
-         System.out.println(tre);  // [1, 2, 4, 4, 4, 6, 7, 7, 8, 9, 10]
-
-        /*int[] a = {4,7,2,9,4,10,8,7,4,6,1};
-
+        int[] a = {4,7,2,9,4,10,8,7,4,6,1};
         ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
         for(int verdi : a) tre.leggInn(verdi);
-        //System.out.println(tre.fjernAlle(4));  // 3   tre.fjernAlle(7); tre.fjern(8);
+        System.out.println(tre.fjernAlle(4));  // 3
+        tre.fjernAlle(7); tre.fjern(8);
         System.out.println(tre.antall());  // 5
         System.out.println(tre + "​ ​"+tre.toString());   // [1, 2, 6, 9, 10] [10, 9, 6, 2, 1]
-        // OBS: Hvis du ikke har gjort oppgave 4 kan du her bruke toString()*/
+        // OBS: Hvis du ikke har gjort oppgave 4 kan du her bruke toString(
     }
 
 } // ObligSBinTre
