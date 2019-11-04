@@ -626,4 +626,4 @@ public class ObligSBinTre<T> implements Beholder<T>
         // OBS: Hvis du ikke har gjort oppgave 4 kan du her bruke toString()*/
     }
 
-} // ObligSBinTre
+} // ObligSBinT
