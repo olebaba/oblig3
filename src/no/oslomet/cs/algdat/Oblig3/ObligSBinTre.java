@@ -223,6 +223,18 @@ public class ObligSBinTre<T> implements Beholder<T>
     }
 
     private static <T> Node<T> nesteInorden(Node<T> p) {
+        Node<T> q = p;
+
+        if(q.forelder == null){
+            if(q.høyre != null){
+                q = q.høyre;
+                while (q.venstre != null){
+                    q = q.venstre;
+                }
+                return q;
+            }
+            return null;
+        }
 
         if(p==null) return null;
         if(p.høyre!=null){
@@ -250,7 +262,20 @@ public class ObligSBinTre<T> implements Beholder<T>
         }
         return p;
     }
+        if(q.høyre != null){
+            q = q.høyre;
+            while (q.venstre != null){
+                q = q.venstre;
+            }
+            return q;
+        }
 
+        if(q.forelder.venstre == p) return q.forelder;
+
+        while(q.forelder != null && q.forelder.høyre == q) q = q.forelder;
+
+        return q.forelder;
+    }
 
     @Override
     public String toString(){
@@ -530,15 +555,43 @@ public class ObligSBinTre<T> implements Beholder<T>
                 p=nesteInorden(p);
             }
 
-            
+
 
             return q.verdi;
         }
 
         @Override
-        public void remove()
-        {
-            throw new UnsupportedOperationException("Ikke kodet ennå!");
+        public void remove(){
+
+            if(!removeOK){
+                throw new IllegalStateException("feil ved fjerning");
+            }
+
+            removeOK = false;
+
+            if(q.forelder != null){
+
+                if(q.forelder.venstre == q){
+
+                    q.forelder.verdi = null;
+
+                    q.forelder = null;
+                }
+                else{
+
+                    q.forelder.høyre = null;
+
+                    q.forelder = null;
+                }
+            }
+            else{
+                    rot = null;
+
+                    System.out.println("");
+                }
+            antall--;
+            iteratorendringer++;
+            endringer++;
         }
 
     } // BladnodeIterator
@@ -556,12 +609,12 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     public static void main(String[] args){
 
-         int[] a = {3,5,6,3,2,1,4,5};
+         int[] a = {4,7,2,9,4,10,8,7,4,6,1};
          ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
          for(int verdi : a) tre.leggInn(verdi);
 
-         test(tre);
-         //System.out.println(tre);  // [1, 2, 4, 4, 4, 6, 7, 7, 8, 9, 10]
+         //test(tre);
+         System.out.println(tre);  // [1, 2, 4, 4, 4, 6, 7, 7, 8, 9, 10]
 
         /*int[] a = {4,7,2,9,4,10,8,7,4,6,1};
 
