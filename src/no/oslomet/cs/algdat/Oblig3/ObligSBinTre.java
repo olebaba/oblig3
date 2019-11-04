@@ -262,20 +262,20 @@ public class ObligSBinTre<T> implements Beholder<T>
         }
         return p;
     }
-        if(q.høyre != null){
-            q = q.høyre;
-            while (q.venstre != null){
-                q = q.venstre;
-            }
-            return q;
-        }
+//        if(q.høyre != null){
+//            q = q.høyre;
+//            while (q.venstre != null){
+//                q = q.venstre;
+//            }
+//            return q;
+//        }
+//
+//        if(q.forelder.venstre == p) return q.forelder;
+//
+//        while(q.forelder != null && q.forelder.høyre == q) q = q.forelder;
+//
+//        return q.forelder;
 
-        if(q.forelder.venstre == p) return q.forelder;
-
-        while(q.forelder != null && q.forelder.høyre == q) q = q.forelder;
-
-        return q.forelder;
-    }
 
     @Override
     public String toString(){
