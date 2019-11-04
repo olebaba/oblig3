@@ -178,6 +178,17 @@ public class ObligSBinTre<T> implements Beholder<T>
     private static <T> Node<T> nesteInorden(Node<T> p) {
         Node<T> q = p;
 
+        if(q.forelder == null){
+            if(q.høyre != null){
+                q = q.høyre;
+                while (q.venstre != null){
+                    q = q.venstre;
+                }
+                return q;
+            }
+            return null;
+        }
+
         if(q.høyre != null){
             q = q.høyre;
             while (q.venstre != null){
@@ -186,49 +197,11 @@ public class ObligSBinTre<T> implements Beholder<T>
             return q;
         }
 
-        if(q.forelder == null){
-            System.out.println("test0");
-            if(q.høyre != null) {
-                q = q.høyre;
-                while (q.venstre != null) {
-                    q = q.venstre;
-                }
-                return q;
-            }else {
-                return null;
-            }
-        }
+        if(q.forelder.venstre == p) return q.forelder;
 
+        while(q.forelder != null && q.forelder.høyre == q) q = q.forelder;
 
-        if(q.forelder.venstre == p){
-            q = q.forelder;
-            System.out.println("test3");
-            return q;
-        }
-
-        if(q.forelder.høyre == p){
-            q = q.forelder.forelder;
-            System.out.println("test4");
-            return q;
-        }
-
-        q = q.forelder;
-        if(q.høyre != null && q.høyre != p) {
-            if (q.forelder != null) {
-                q = q.forelder;
-                System.out.println("test5");
-                return q;
-            } else {
-                System.out.println("test5.1");
-                q = q.høyre;
-                while (q.venstre != null) {
-                    q = q.venstre;
-                }
-                return q;
-            }
-        }
-
-        return null;
+        return q.forelder;
     }
 
     @Override
@@ -413,12 +386,12 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     public static void main(String[] args){
 
-         int[] a = {3, 3, 5, 6, 4, 5, 2, 1};
+         int[] a = {4,7,2,9,4,10,8,7,4,6,1};
          ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
          for(int verdi : a) tre.leggInn(verdi);
 
-         test(tre);
-         //System.out.println(tre);  // [1, 2, 4, 4, 4, 6, 7, 7, 8, 9, 10]
+         //test(tre);
+         System.out.println(tre);  // [1, 2, 4, 4, 4, 6, 7, 7, 8, 9, 10]
 
         /*int[] a = {4,7,2,9,4,10,8,7,4,6,1};
 
