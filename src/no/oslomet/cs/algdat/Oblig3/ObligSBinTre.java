@@ -545,6 +545,10 @@ public class ObligSBinTre<T> implements Beholder<T>
         public T next()
         {
             removeOK = true;
+            
+            if(endringer != iteratorendringer){
+                throw new ConcurrentModificationException();
+            }
 
             if (!hasNext()) throw new NoSuchElementException("Ingen verdier!");
 
