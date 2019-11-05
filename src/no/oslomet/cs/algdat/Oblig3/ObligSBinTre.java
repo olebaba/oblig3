@@ -171,7 +171,6 @@ public class ObligSBinTre<T> implements Beholder<T>
             x=fjern(verdi);
         };
         return antallF-1;
-
     }
 
     @Override
@@ -276,7 +275,6 @@ public class ObligSBinTre<T> implements Beholder<T>
 //
 //        return q.forelder;
 
-
     @Override
     public String toString(){
 
@@ -301,7 +299,6 @@ public class ObligSBinTre<T> implements Beholder<T>
 
         sb.append(c.verdi + "]");
         return sb.toString();
-
     }
 
   public String omvendtString(){
@@ -399,12 +396,10 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     }
 
-
     public String[] grener()
     {
         if (tom()) return new String[]{};
         if (antall()==1) return new String[]{"["+ rot.verdi.toString()+"]"};
-
 
         Liste<Node<T>> list=new TabellListe<>();
         Liste<Node<T>> bladlist=new TabellListe<>();
@@ -420,13 +415,11 @@ public class ObligSBinTre<T> implements Beholder<T>
         }
         list.leggInn(c);
 
-
         for(Node<T> i:list){
             if(i.venstre==null && i.høyre==null){
                 bladlist.leggInn(i);
             }
         }
-
 
         int l=bladlist.antall();
         String[] ut=new String[l];
@@ -440,11 +433,8 @@ public class ObligSBinTre<T> implements Beholder<T>
             e++;
             hstakk.nullstill();
         }
-
-
-
+        
         return ut;
-
     }
 
     public String bladnodeverdier()
@@ -466,7 +456,6 @@ public class ObligSBinTre<T> implements Beholder<T>
 
         return list;
     }
-
 
     public String postString(){
           
@@ -508,7 +497,6 @@ public class ObligSBinTre<T> implements Beholder<T>
       }
       sb.append("]");
 
-
       return sb.toString();
     }
 
@@ -531,7 +519,6 @@ public class ObligSBinTre<T> implements Beholder<T>
             while(p.venstre != null){
             p = p.venstre;
             }
-
 
         }
 
@@ -559,8 +546,6 @@ public class ObligSBinTre<T> implements Beholder<T>
                 }
                 p=nesteInorden(p);
             }
-
-
 
             return q.verdi;
         }
@@ -611,7 +596,6 @@ public class ObligSBinTre<T> implements Beholder<T>
     }
 
 }
-
     public static void main(String[] args){
 
          int[] a = {4,7,2,9,4,10,8,7,4,6,1};
