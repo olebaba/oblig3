@@ -515,11 +515,31 @@ public class ObligSBinTre<T> implements Beholder<T>
 
         private BladnodeIterator()  // konstruktør
         {
+         
+         /*
             if(rot==null) return;
             while(p.venstre != null){
             p = p.venstre;
             }
-
+         */
+         
+         if(!tom()){
+         
+                Node<T> c = rot;
+                
+                while(p.venstre != null){
+                    p = p.venstre;
+                }
+                while(true){
+                    
+                    if(p.høyre == null && p.venstre == null){
+                        break;
+                    }
+                    
+                    p = nesteInorden(p);
+                }
+                
+                q = p;
         }
 
         @Override
