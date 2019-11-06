@@ -577,7 +577,8 @@ public class ObligSBinTre<T> implements Beholder<T>
             removeOK = true;
             return value;
         }
-
+        
+        /*
         @Override
         public void remove(){
 
@@ -607,6 +608,36 @@ public class ObligSBinTre<T> implements Beholder<T>
 
                     System.out.println("");
                 }
+            antall--;
+            iteratorendringer++;
+            endringer++;
+        }
+        */
+        
+        @Override
+        public void remove(){
+            
+            if(!removeOK){
+                throw new IllegalStateException("feil ved fjerning");
+            }
+            
+            if(q.forelder != null){
+                
+                if(q.forelder.venstre == q){
+                    
+                    q.forelder.verdi = null;
+                    
+                    q.forelder = null;
+                }
+                else{
+                    
+                    q.forelder.høyre = null;
+                    
+                    q.forelder = null;
+                }
+            }
+            
+            removeOK = false;
             antall--;
             iteratorendringer++;
             endringer++;
