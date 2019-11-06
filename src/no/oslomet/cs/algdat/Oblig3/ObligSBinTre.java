@@ -226,10 +226,10 @@ public class ObligSBinTre<T> implements Beholder<T>
     private static <T> Node<T> nesteInorden(Node<T> p) {
         Node<T> q = p;
 
-        if(q.forelder == null){
-            if(q.høyre != null){
+        if (q.forelder == null) {
+            if (q.høyre != null) {
                 q = q.høyre;
-                while (q.venstre != null){
+                while (q.venstre != null) {
                     q = q.venstre;
                 }
                 return q;
@@ -237,45 +237,20 @@ public class ObligSBinTre<T> implements Beholder<T>
             return null;
         }
 
-        if(p==null) return null;
-        if(p.høyre!=null){
-            p=p.høyre;
-            while (p.venstre!=null){
-                p=p.venstre;
+        if (q.høyre != null) {
+            q = q.høyre;
+            while (q.venstre != null) {
+                q = q.venstre;
             }
-            return p;
+            return q;
         }
-        Node<T> sisteTemp=p;
-        while (sisteTemp.forelder!=null){
-            sisteTemp=sisteTemp.forelder;
-        }
-        while (sisteTemp.høyre!=null){
-            sisteTemp=sisteTemp.høyre;
-        }
-        if (p==sisteTemp) return null;
-//        Hvis p ikke har et høyre subtre og p ikke er
-//        den siste, vil den neste i inorden være høyere opp i treet.
-        Node<T> temp;
-        while (p.forelder!=null){
-            temp=p;
-            p=p.forelder;
-            if (p.høyre==null || p.høyre!=temp) return p;
-        }
-        return p;
+
+        if (q.forelder.venstre == p) return q.forelder;
+
+        while (q.forelder != null && q.forelder.høyre == q) q = q.forelder;
+
+        return q.forelder;
     }
-//        if(q.høyre != null){
-//            q = q.høyre;
-//            while (q.venstre != null){
-//                q = q.venstre;
-//            }
-//            return q;
-//        }
-//
-//        if(q.forelder.venstre == p) return q.forelder;
-//
-//        while(q.forelder != null && q.forelder.høyre == q) q = q.forelder;
-//
-//        return q.forelder;
 
     @Override
     public String toString(){
