@@ -547,7 +547,7 @@ public class ObligSBinTre<T> implements Beholder<T>
         {
             return p != null;  // Denne skal ikke endres!
         }
-
+        /*
         @Override
         public T next()
         {
@@ -569,6 +569,30 @@ public class ObligSBinTre<T> implements Beholder<T>
 
             return q.verdi;
         }
+        */
+        
+        @Override
+        public T next(){
+            
+            if(!hasNext()){
+                throw new NoSuchElementException();
+            }
+            if(endringer != iteratorendringer){
+                throw new ConcurrentModificationException("Iteratorendringer er "+iteratorendringer+" og "+
+                        endringer);
+            }
+            
+            T value = p.verdi;
+            q = p;
+
+            p.nesteInorden(p);
+            
+            while(p != null && (p.venstre != null || p.høyre != null)){
+                p = nesteInorden(p);
+            }
+            removeOK = true;
+            return value;
+        }    
 
         @Override
         public void remove(){
