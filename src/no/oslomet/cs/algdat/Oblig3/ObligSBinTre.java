@@ -52,7 +52,6 @@ public class ObligSBinTre<T> implements Beholder<T>
     @Override
     public boolean leggInn(T verdi)
     {
-        //throw new UnsupportedOperationException("Ikke kodet ennå!");
         Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
         hjelpestakk.leggInn(verdi);
         hjelpeliste.leggInn(verdi);
@@ -183,28 +182,12 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     public int antall(T verdi)
     {
-        //throw new UnsupportedOperationException("Ikke kodet ennå!");
         if(!inneholder(verdi)) return 0;
         //Node<T> p = rot;
         int antallP = 0;
         for (T n : hjelpeliste) {
             if (n.equals(verdi)) antallP++;
         }
-
-      /*int cmp = comp.compare(verdi, p.verdi);
-
-      while (true){
-          while (p.venstre != null){
-              p = p.venstre;
-          }
-          if(p.venstre != null){
-              p = p.venstre;
-
-          } else if(p.høyre == null) break;
-          else {
-              p = p.høyre;
-          }
-      }*/
 
         return antallP;
     }
@@ -301,38 +284,6 @@ public class ObligSBinTre<T> implements Beholder<T>
 
       stakk.leggInn(c);
 
-//      StringBuilder sb = new StringBuilder();
-//      sb.append("[");
-
-
-
-//      while(true){
-//
-//          if(t == 1){
-//              sb.append(c.verdi + "]");
-//              break;
-//          }
-//          else{
-//              sb.append(c.verdi + ", ");
-//              t--;
-//          }
-//      }
-
-//      for(; c.høyre != null; c = c.høyre){
-//          stakk.leggInn(c);
-//      }
-//
-//      if(c.venstre != null){
-//
-//          for(c = c.venstre; c.høyre != null; c = c.høyre){
-//              stakk.leggInn(c);
-//          }
-//      }
-//      else{
-//          c = stakk.taUt();
-//      }
-//
-//      sb.append("]");
       return stakk.toString();
   }
 
@@ -553,42 +504,6 @@ public class ObligSBinTre<T> implements Beholder<T>
             return value;
         }
         
-        /*
-        @Override
-        public void remove(){
-
-            if(!removeOK){
-                throw new IllegalStateException("feil ved fjerning");
-            }
-
-            removeOK = false;
-
-            if(q.forelder != null){
-
-                if(q.forelder.venstre == q){
-
-                    q.forelder.verdi = null;
-
-                    q.forelder = null;
-                }
-                else{
-
-                    q.forelder.høyre = null;
-
-                    q.forelder = null;
-                }
-            }
-            else{
-                    rot = null;
-
-                    System.out.println("");
-                }
-            antall--;
-            iteratorendringer++;
-            endringer++;
-        }
-        */
-        
         @Override
         public void remove(){
             
@@ -633,21 +548,6 @@ public class ObligSBinTre<T> implements Beholder<T>
 }
     public static void main(String[] args){
 
-         int[] a = {4,7,2,9,4,10,8,7,4,6,1};
-         ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
-         for(int verdi : a) tre.leggInn(verdi);
-
-         //test(tre);
-         System.out.println(tre);  // [1, 2, 4, 4, 4, 6, 7, 7, 8, 9, 10]
-
-        /*int[] a = {4,7,2,9,4,10,8,7,4,6,1};
-
-        ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
-        for(int verdi : a) tre.leggInn(verdi);
-        //System.out.println(tre.fjernAlle(4));  // 3   tre.fjernAlle(7); tre.fjern(8);
-        System.out.println(tre.antall());  // 5
-        System.out.println(tre + "​ ​"+tre.toString());   // [1, 2, 6, 9, 10] [10, 9, 6, 2, 1]
-        // OBS: Hvis du ikke har gjort oppgave 4 kan du her bruke toString()*/
     }
 
 } // ObligSBinT
