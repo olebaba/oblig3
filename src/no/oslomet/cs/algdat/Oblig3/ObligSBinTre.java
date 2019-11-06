@@ -554,7 +554,7 @@ public class ObligSBinTre<T> implements Beholder<T>
         {
             return p != null;  // Denne skal ikke endres!
         }
-        
+
         @Override
         public T next(){
 
@@ -625,7 +625,7 @@ public class ObligSBinTre<T> implements Beholder<T>
                 
                 if(q.forelder.venstre == q){
                     
-                    q.forelder.verdi = null;
+                    q.forelder.venstre = null;
                     
                     q.forelder = null;
                 }
@@ -636,6 +636,7 @@ public class ObligSBinTre<T> implements Beholder<T>
                     q.forelder = null;
                 }
             }
+
             
             removeOK = false;
             antall--;
