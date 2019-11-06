@@ -183,7 +183,6 @@ public class ObligSBinTre<T> implements Beholder<T>
     public int antall(T verdi)
     {
         if(!inneholder(verdi)) return 0;
-        //Node<T> p = rot;
         int antallP = 0;
         for (T n : hjelpeliste) {
             if (n.equals(verdi)) antallP++;
@@ -269,8 +268,7 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(antall == 1){
           return ("["+rot+"]");
       }
-      
-      int t = antall;
+
       Stakk<Node<T>> stakk = new TabellStakk<>();
       Node<T> c = rot;
 
@@ -450,14 +448,11 @@ public class ObligSBinTre<T> implements Beholder<T>
         private Node<T> p = rot, q = null;
         private boolean removeOK = false;
         private int iteratorendringer = endringer;
-        private Kø<Node<T>> ko = new TabellKø<>();
 
         private BladnodeIterator()  // konstruktør
         {
 
             if (!tom()) {
-
-                Node<T> c = rot;
 
                 while (p.venstre != null) {
                     p = p.venstre;
@@ -535,19 +530,5 @@ public class ObligSBinTre<T> implements Beholder<T>
         }
 
     } // BladnodeIterator
-
-    public static void test(ObligSBinTre tre){
-    Node p = tre.rot;
-    while (p.venstre != null) p = p.venstre;
-        System.out.println(p);
-    while (nesteInorden(p) != null){
-        System.out.println(nesteInorden(p));
-        p=nesteInorden(p);
-    }
-
-}
-    public static void main(String[] args){
-
-    }
 
 } // ObligSBinT
